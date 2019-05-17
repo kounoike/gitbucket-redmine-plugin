@@ -1,4 +1,3 @@
 # gitbucket-redmine-plugin
 
-## install
-
+current status: pre-alpha
