@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<changeSet>
+    <createTable tableName="REDMINE_CONFIG">
+        <column name="USER_NAME" type="varchar(100)" nullable="false"/>
+        <column name="REPOSITORY_NAME" type="varchar(100)" nullable="false"/>
+        <column name="REDMINE_URL" type="varchar(500)" nullable="false"/>
+        <column name="REDMINE_PROJECT" type="varchar(100)" nullable="false"/>
+        <column name="REDMINE_API_KEY" type="varchar(100)" nullable="false"/>
+    </createTable>
+    <addPrimaryKey constraintName="IDX_REDMINE_CONFIG_PK" tableName="REDMINE_CONFIG" columnNames="USER_NAME, REPOSITORY_NAME"/>
+</changeSet>

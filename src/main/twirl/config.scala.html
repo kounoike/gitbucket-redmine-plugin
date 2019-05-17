@@ -1,0 +1,44 @@
+@(repository: gitbucket.core.service.RepositoryService.RepositoryInfo,
+    config: Option[model.RedmineConfig],
+    info: Option[Any])(implicit context: gitbucket.core.controller.Context)
+@import gitbucket.core.view.helpers._
+@gitbucket.core.html.main(s"Redmine config - ${repository.owner}/${repository.name}", Some(repository)) {
+    @gitbucket.core.html.menu("settings", repository) {
+        @gitbucket.core.settings.html.menu("redmine", repository) {
+            @gitbucket.core.helper.html.information(info)
+            <form action="@url(repository)/settings/redmine" method="POST" validate="true" autocomplete="off">
+                <div class="panel panel-default">
+                    <div class="panel-heading strong">Redmine</div>
+                    <div class="panel-body">
+                        <fieldset class="form-group">
+                            <label class="checkbox" for="enableRedmine">
+                                <input type="checkbox" id="enableRedmine" name="enableRedmine" @if(config.isDefined){checked}>
+                                <span>Enable Redmine</span>
+                            </label>
+                        </fieldset>
+                        <div id="redmineSettings">
+                            <fieldset class="form-group">
+                                <span class="normal muted">Redmine URL</span>
+                                <input id="redmineUrl" name="redmineUrl" class="form-control" value="@config.map(_.redmineUrl)">
+                                <span id="error-redmineUrl" class="error"></span>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <span class="normal muted">Redmine project name</span>
+                                <input id="redmineProject" name="redmineProject" class="form-control" value="@config.map(_.redmineProject)">
+                                <span id="error-redmineProject" class="error"></span>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <span class="normal muted">Redmine API Key</span>
+                                <input id="apiKey" name="apiKey" class="form-control" value="@config.map(_.apiKey)">
+                                <span id="error-apiKey" class="error"></span>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="align-right" style="margin-top: 20px;">
+                    <input type="submit" class="btn btn-success" value="Apply changes">
+                </div>
+            </form>
+        }
+    }
+}
